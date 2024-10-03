@@ -31,27 +31,14 @@ int main() {
             case 4: SearchReservation();
             break;
 
-            // // case 5: {
-            // //     if (reservationCount == 0) {
-            // //         printf("No data available.\n");
-            // //         continue;
-            // //     }
-            // //     SearchReservation();
-            // // }
-            // break;
+            case 5: SortReservation();
+            break;
 
-            // // case 6: {
-            // //     if (reservationCount == 0) {
-            // //         printf("No data available.\n");
-            // //         continue;
-            // //     }
-            // //     generateStatistics();
-            // // }
-            // break;
+            case 6: Statistics();
+            break;
 
-            case 7: {
-                return 0;
-            }
+            case 7: printf("Exiting....,Time to Say GOOD bYE");
+                    return 0;
             break;
 
             default:
