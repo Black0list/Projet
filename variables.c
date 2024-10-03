@@ -21,8 +21,8 @@ typedef struct {
 int reservationCount = 10;
 int referenceCount = 10;
 Reservation reservations[MAX] = {
-                                {1,"khalid","khalid","076487213",20,"valide",{11,12,2024}},
-                                {2,"Omar","lem","076487213",11,"reporte",{11,12,2024}},
+                                {1,"khalid","khalid","076487213",20,"valide",{11,12,2004}},
+                                {2,"Omar","lem","076487213",11,"reporte",{11,12,2002}},
                                 {3,"aziz","amzmiz","076487213",22,"valide",{11,12,2024}},
                                 {4,"khaldi","lemagni","076487213",18,"traite",{11,12,2024}},
                                 {5,"abdo","hadoui","076487213",12,"annule",{11,12,2024}},
