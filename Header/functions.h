@@ -5,7 +5,7 @@ void addReservation();
 void ModifyOrDeleteReservation();
 
 void ShowReservation();
-void ShowAllReservations();
+void ShowAllReservations(Reservation NEW[]);
 void ShowReservationByReference(int id);
 
 void SearchReservation();
@@ -14,7 +14,7 @@ void SearchReservationByName(char name[]);
 void SearchReservationByDate(char date[]);
 
 void SortReservation();
-void Sort(int type);
+void Sort(int type, Reservation NEW[]);
 
 int GetStatusIndex(char status[]);
 
