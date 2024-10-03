@@ -11,7 +11,7 @@ void ShowReservationByReference(int id);
 void SearchReservation();
 int SearchReservationByReference(int id);
 void SearchReservationByName(char name[]);
-void SearchReservationByDate(char date[]);
+void SearchReservationByDate(int day, int month, int year);
 
 void SortReservation();
 void Sort(int type, Reservation NEW[]);

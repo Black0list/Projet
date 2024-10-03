@@ -231,7 +231,6 @@ void ShowReservationByReference(int id) {
             printf("Status: %s\n", reservations[index].status);
             printf("Date: %d/%d/%d\n", reservations[index].date.day,reservations[index].date.month,reservations[index].date.year);
 }
-
 ///////////////////////////////////////// RECHERCHE /////////////////////////////////////////////
 void SearchReservation(){
     system("cls");
@@ -277,11 +276,11 @@ void SearchReservation(){
                 break;
 
             case 3: {
-                        // char date[MAX];
+                        int day,month,year;
 
-                        // printf("Enter date : ");
-                        // InputChar(date);
-                        // SearchReservationByDate(date);
+                        printf("Enter date (dd/mm/yyyy): ");
+                        scanf("%d/%d/%d", &day,&month,&year);
+                        SearchReservationByDate(day,month,year);
 
                 }
                 break;
@@ -332,26 +331,25 @@ void SearchReservationByName(char name[]){
     }
 }
 
-// void SearchReservationByDate(char date[]){
-//     int found =  0;
+void SearchReservationByDate(int day, int month, int year){
+    int found =  0;
 
-//     for(int i=0;i<referenceCount;i++){
-//         if(strcasecmp(reservations[i].date, date) == 0){
-//             printf("Reference: %d\n", reservations[i].reference);
-//             printf("Name: %s\n", reservations[i].name);
-//             printf("Prenom: %s\n", reservations[i].prenom);
-//             printf("Phone: %s\n", reservations[i].phone);
-//             printf("Age: %d\n", reservations[i].age);
-//             printf("Date: %d/%d/%d\n", reservations[index].date.year,reservations[index].date.month,reservations[index].date.year);
-//             found = 1;
-//             break;
-//         }
-//     }
-//     if(!found){
-//         printf("Reservation with name %s not found.\n", date);
-//         return;
-//     }
-// }
+    for(int i=0;i<referenceCount;i++){
+        if(reservations[i].date.day == day && reservations[i].date.month == month && reservations[i].date.year == year){
+            printf("Reference: %d\n", reservations[i].reference);
+            printf("Name: %s\n", reservations[i].name);
+            printf("Prenom: %s\n", reservations[i].prenom);
+            printf("Phone: %s\n", reservations[i].phone);
+            printf("Age: %d\n", reservations[i].age);
+            printf("Date: %d/%d/%d\n", reservations[i].date.day,reservations[i].date.month,reservations[i].date.year);
+            found = 1;
+        }
+    }
+    if(!found){
+        printf("No Reservation with date %d/%d/%d not found.\n", day,month,year);
+        return;
+    }
+}
 
 
 ////////////////////////////////////// SORTS /////////////////////////////////////////////////
@@ -408,6 +406,7 @@ void Sort(int type, Reservation NEW[]){
                 }
             }
     } else if(type == 2){
+
             for(int i=0;i<referenceCount - 1;i++){
                 for(int j=0;j<referenceCount -i -1;j++){
                     if(reservations[j].date.day > reservations[j+1].date.day){
