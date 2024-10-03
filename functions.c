@@ -5,13 +5,20 @@
 #include "Header/functions.h"
 
 
-//////////////////////////// INPUT FUCNTIONS /////////////////////////////////////////////
-void InputChar( char input[]){
+////////////////////////////////////// INPUT FUCNTION /////////////////////////////////////
+//facilite insertion des chaine de caracteres
+void InputChar(char input[]){
     scanf(" %[^\n]", input);
 }
 ////////////////////////////////////////// AJOUT //////////////////////////////////////////
+//- Faire ajout des patients :
 void addReservation(){
     system("cls");
+
+    if(reservationCount >= MAX){
+        printf("Your applicationis Full");
+        return;
+    }
 
     int n;
     printf("Enter number of reservations to add : ");
@@ -43,6 +50,9 @@ void addReservation(){
     reservationCount += n;
 }
 /////////////////////////////////// MODIFICATION & SUPPRESSION ///////////////////////////////////
+// faire modification ou la suppression d une reservation a l aide de l appel de la fonction de recherche  par 
+// reference qui retourne 1 (patient est Trouve ) ou -1 (en cas de echec);
+
 void ModifyOrDeleteReservation() {
     system("cls");
 
@@ -139,6 +149,7 @@ void ModifyOrDeleteReservation() {
         }
         break;
 
+        //pour la suppressionOn fait juste le decalage des elements tu Tableau et en reduire la taille
         case 2: {
             for (int i = index; i < referenceCount - 1; i++) {
                 reservations[i] = reservations[i + 1]; 
@@ -155,6 +166,9 @@ void ModifyOrDeleteReservation() {
 
 }
 ///////////////////////////////////// AFFICHAGE ////////////////////////////////////
+//- Menu d affichage Compose de :
+//1.  affichage de toutes les reservations
+//2.  affichage  d une reservation par reference
 void ShowReservation(){
     system("cls");
     if (referenceCount == 0) {
@@ -173,6 +187,7 @@ void ShowReservation(){
 
         switch (choice) {
             case 1:
+                //affichage de toutes les patient (boucle for)
                 ShowAllReservations(reservations);
                 break;
 
@@ -180,12 +195,14 @@ void ShowReservation(){
                 int id;
                 printf("Enter the reference number: ");
                 scanf("%d", &id);
-
+                
+                //affichage d un seul patient en passe Id comme parametre
                 ShowReservationByReference(id);
                 break;
             }
             
             case 3:
+                system("cls");
                 printf("Going back to the main menu.\n");
                 break;
 
@@ -201,7 +218,7 @@ void ShowReservation(){
 void ShowAllReservations(Reservation NEW[]){
     printf("\n=========================== All Reservations ===========================\n");
     for(int i=0;i<referenceCount;i++){
-            printf("\n==================================== Reservation N %d=============================\n",i+1);
+            printf("\n============== Reservation N %d ==============\n",i+1);
             printf("Reference: %d\n", NEW[i].reference);
             printf("Name: %s\n", NEW[i].name);
             printf("Prenom: %s\n", NEW[i].prenom);
@@ -210,11 +227,11 @@ void ShowAllReservations(Reservation NEW[]){
             printf("Status: %s\n", NEW[i].status);
             printf("Date: %d/%d/%d\n", NEW[i].date.day,NEW[i].date.month,NEW[i].date.year);
     }
-    //SearchReservationByReference(i);
 }
 
 ///1 
 void ShowReservationByReference(int id) {
+    //focntion de recherche retourn index ,Et o l utilise pour affichage
     int index = SearchReservationByReference(id);
 
     if (index == -1) {
@@ -222,7 +239,7 @@ void ShowReservationByReference(int id) {
         return;
     }
 
-    printf("\n================ Reservation N %d ================\n",index+1);
+    printf("\n============== Reservation N %d ==============\n",index+1);
             printf("Reference: %d\n", reservations[index].reference);
             printf("Name: %s\n", reservations[index].name);
             printf("Prenom: %s\n", reservations[index].prenom);
@@ -232,6 +249,10 @@ void ShowReservationByReference(int id) {
             printf("Date: %d/%d/%d\n", reservations[index].date.day,reservations[index].date.month,reservations[index].date.year);
 }
 ///////////////////////////////////////// RECHERCHE /////////////////////////////////////////////
+//- Menu d de Recherche Compose de :
+//1.  recherche Utilisont la reference
+//2.  recherche Utilisont la Nom (fct strcasecmp)
+//3.  recherche par date la date
 void SearchReservation(){
     system("cls");
     if (referenceCount == 0) {
@@ -286,6 +307,7 @@ void SearchReservation(){
                 break;
 
             case 4:
+                system("cls");
                 printf("Going back to the main menu.\n");
                 break;
 
@@ -340,7 +362,10 @@ void SearchReservationByDate(int day, int month, int year){
 }
 
 
-////////////////////////////////////// SORTS /////////////////////////////////////////////////
+////////////////////////////////////// SORTS (algo Tri a bulle)///////////////////////////////////////////
+// menu Pour les fonctions de tri (Nom, Status, Date)
+//1.  Tri par Nom (strcasecmp)
+//2. Tri par Status a l aide de  la fct GetStatusIndex qui retourn selon la proprite 
 void SortReservation(){
     system("cls");
 
@@ -366,6 +391,7 @@ void SortReservation(){
                 break;
 
             case 3:
+                system("cls");
                 printf("Going back to the main menu.\n");
                 break;
 
@@ -393,10 +419,10 @@ void Sort(int type, Reservation NEW[]){
     }else if(type == 2){
             for(int i=0;i<referenceCount - 1;i++){
                 for(int j=0;j<referenceCount -i -1;j++){
-                    if(GetStatusIndex(reservations[j].status) > GetStatusIndex(reservations[j+1].status)){
-                        T = reservations[j];
-                        reservations[j] = reservations[j+1];
-                        reservations[j+1] = T;
+                    if(GetStatusIndex(NEW[j].status) > GetStatusIndex(NEW[j+1].status)){
+                        T = NEW[j];
+                        NEW[j] = NEW[j+1];
+                        NEW[j+1] = T;
                     }
                 }
             }
@@ -423,6 +449,10 @@ int GetStatusIndex(char status[]){
 
 
 //////////////////////////////////// STATISTICS /////////////////////////////////////
+//Menu des Statistiques compose de 3 fonctions Pricipales :
+//1. AverageAge calculMoyenne d age;
+//2. Affiche Nombre des Patients de chaque age section
+//3. Donne Nombre Totale des reservations Selon les Status (GetIndexStatus)
 void Statistics(){
     system("cls");
     if (referenceCount == 0) {
@@ -441,16 +471,21 @@ void Statistics(){
         scanf("%d", &choice);
 
         switch (choice) {
-            case 1: AverageAge();
+            
+            case 1: system("cls");
+                    AverageAge();
                 break;
 
-            case 2: SectionsAge();
+            case 2: system("cls");
+                    SectionsAge();
                 break;
             
-            case 3: TotaleReservationsByStatus();
+            case 3: system("cls");
+                    TotaleReservationsByStatus();
                 break;
 
             case 4:
+                system("cls");
                 printf("Going back to the main menu.\n");
                 break;
 
@@ -475,26 +510,18 @@ void AverageAge(){
 }
 
 void SectionsAge(){
-    printf("========================== 0-18 ============================");
+    int age_0_18 = 0,age_19_36 = 0, age_36 = 0;
     for(int i=0;i<referenceCount;i++){
         if(reservations[i].age>=0 && reservations[i].age <= 18) {
-            ShowReservationByReference(i+1);
+            age_0_18++;
+        } else if(reservations[i].age>=19 && reservations[i].age <= 36) {
+            age_19_36++;
+        } else if(reservations[i].age>36) {
+            age_36++;
         }
     }
-
-    printf("========================== 19-36 ============================");
-    for(int i=0;i<referenceCount;i++){
-        if(reservations[i].age>=19 && reservations[i].age <= 36) {
-            ShowReservationByReference(i+1);
-        }
-    }
-
-    printf("========================== 36+ ============================");
-    for(int i=0;i<referenceCount;i++){
-        if(reservations[i].age>36) {
-            ShowReservationByReference(i+1);
-        }
-    }
+    printf("\n================================ Sections Age ==================================\n");
+    printf("0-18 ans = %d\n19-36 ans = %d\n36+ ans = %d",age_0_18, age_19_36, age_36);
 }
 void TotaleReservationsByStatus(){
     int valide = 0,reporte = 0,annule = 0,traite = 0;
