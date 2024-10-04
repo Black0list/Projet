@@ -12,6 +12,7 @@ void InputChar(char input[]){
 }
 ////////////////////////////////////////// AJOUT //////////////////////////////////////////
 //- Faire ajout des patients :
+//- va nous demander Nombre elements a inserer
 void addReservation(){
     system("cls");
 
@@ -50,8 +51,8 @@ void addReservation(){
     reservationCount += n;
 }
 /////////////////////////////////// MODIFICATION & SUPPRESSION ///////////////////////////////////
-// faire modification ou la suppression d une reservation a l aide de l appel de la fonction de recherche  par 
-// reference qui retourne 1 (patient est Trouve ) ou -1 (en cas de echec);
+// faire modification ou la suppression d une reservation O fait l appel de la fonction de recherche  par 
+// reference qui retourne i (patient est Trouve ) ou -1 (en cas de echec);
 
 void ModifyOrDeleteReservation() {
     system("cls");
@@ -92,28 +93,16 @@ void ModifyOrDeleteReservation() {
             char newDate[MAX];
 
             printf("Enter new name: ");
-            InputChar(newName);
-            if (strlen(newName) > 0) {
-                strcpy(reservations[index].name, newName);
-            }
+            InputChar(reservations[index].name);
 
             printf("Enter new prenom : ");
-            InputChar(newPrenom);
-            if (strlen(newPrenom) > 0) {
-                strcpy(reservations[index].prenom, newPrenom);
-            }
+            InputChar(reservations[index].prenom);
 
             printf("Enter Phone Number : ");
-            InputChar(newPhone);
-            if (strlen(newPhone) > 0) {
-                strcpy(reservations[index].phone, newPhone);
-            }
+            InputChar(reservations[index].phone);
 
             printf("Enter New Age :");
-            scanf("%d", &newAge);
-            if (newAge > 0) {
-                reservations[index].age = newAge;
-            }
+            scanf("%d", &reservations[index].age);
 
             printf("Enter New Status : \n1. Valide\n2. reporte\n3. annule\n4. traite:\n5. Exit\n");
             printf("Choice? : ");
