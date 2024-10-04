@@ -6,13 +6,11 @@
 
 
 ////////////////////////////////////// INPUT FUCNTION /////////////////////////////////////
-//facilite insertion des chaine de caracteres
 void InputChar(char input[]){
     scanf(" %[^\n]", input);
 }
 ////////////////////////////////////////// AJOUT //////////////////////////////////////////
-//- Faire ajout des patients :
-//- va nous demander Nombre elements a inserer
+
 void addReservation(){
     system("cls");
 
@@ -51,8 +49,6 @@ void addReservation(){
     reservationCount += n;
 }
 /////////////////////////////////// MODIFICATION & SUPPRESSION ///////////////////////////////////
-// faire modification ou la suppression d une reservation O fait l appel de la fonction de recherche  par 
-// reference qui retourne i (patient est Trouve ) ou -1 (en cas de echec);
 
 void ModifyOrDeleteReservation() {
     system("cls");
@@ -138,7 +134,6 @@ void ModifyOrDeleteReservation() {
         }
         break;
 
-        //pour la suppressionOn fait juste le decalage des elements tu Tableau et en reduire la taille
         case 2: {
             for (int i = index; i < referenceCount - 1; i++) {
                 reservations[i] = reservations[i + 1]; 
@@ -156,8 +151,7 @@ void ModifyOrDeleteReservation() {
 }
 ///////////////////////////////////// AFFICHAGE ////////////////////////////////////
 //- Menu d affichage Compose de :
-//1.  affichage de toutes les reservations
-//2.  affichage  d une reservation par reference
+
 void ShowReservation(){
     system("cls");
     if (referenceCount == 0) {
@@ -176,7 +170,7 @@ void ShowReservation(){
 
         switch (choice) {
             case 1:
-                //affichage de toutes les patient (boucle for)
+                
                 ShowAllReservations(reservations);
                 break;
 
@@ -353,8 +347,6 @@ void SearchReservationByDate(int day, int month, int year){
 
 ////////////////////////////////////// SORTS (algo Tri a bulle)///////////////////////////////////////////
 // menu Pour les fonctions de tri (Nom, Status, Date)
-//1.  Tri par Nom (strcasecmp)
-//2. Tri par Status a l aide de  la fct GetStatusIndex qui retourn selon la proprite 
 void SortReservation(){
     system("cls");
 
@@ -438,10 +430,6 @@ int GetStatusIndex(char status[]){
 
 
 //////////////////////////////////// STATISTICS /////////////////////////////////////
-//Menu des Statistiques compose de 3 fonctions Pricipales :
-//1. AverageAge calculMoyenne d age;
-//2. Affiche Nombre des Patients de chaque age section
-//3. Donne Nombre Totale des reservations Selon les Status (GetIndexStatus)
 void Statistics(){
     system("cls");
     if (referenceCount == 0) {
